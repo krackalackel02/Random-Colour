@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<style>
+		body,
+		body * {
+			margin: 0;
+			font-family: "Caprasimo", cursive;
+		}
+		.container {
+			background-color: rgb(0, 255, 255);
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		.btn {
+			background-color: rgba(255, 255, 255, 0.5);
+			padding: 20px;
+			border-radius: 10px;
+			margin-top: 10px;
+		}
+		.title {
+			position: absolute;
+			left: 10vw;
+			top: 10vh;
+			font-size: 5em;
+			text-decoration-line: underline;
+		}
+		.colourName {
+			background-color: rgba(255, 255, 255, 0.5);
+			border-radius: 10px;
+			padding: 10px;
+		}
+		.colourName:has(.rgb) {
+			position: relative;
+			left: -30px;
+		}
+		.selector {
+			margin-top: 10px;
+			display: flex;
+		}
+		.switches {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+		}
+		.toggle {
+			visibility: hidden;
+		}
+		.label {
+			background-color: rgba(171, 171, 171, 0.7);
+			width: 80px;
+			height: 20px;
+			border-radius: 10px;
+			position: relative;
+			cursor: pointer;
+			display: inline-block; /* Add this line to make the label visible */
+		}
+
+		.ball {
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background-color: rgba(255, 255, 255, 0.5);
+			transition: transform 0.3s;
+		}
+		.toggle:checked + .label .ball {
+			transform: translateX(60px);
+		}
+	</style>
+	<body>
+		<div class="title">Colour Changer</div>
+		<div class="container">
+			<div class="colourName">
+				<div id="header">Background Colour: Aqua</div>
+			</div>
+			<div class="selector">
+				<div class="colourName">
+					<div class="rgb">RGB:</div>
+					<div class="hex">HEX:</div>
+				</div>
+				<div class="switches">
+					<div>
+						<input type="checkbox" id="rgb" class="toggle" checked />
+						<label for="rgb" class="label">
+							<div class="ball"></div>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" id="hex" class="toggle" />
+						<label for="hex" class="label">
+							<div class="ball"></div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<button class="btn" onclick="changeColour()">
+				Change Colour Randomly!
+			</button>
+		</div>
+		<script>
+			let rgb = document.querySelector(".toggle#rgb");
+			let hex = document.querySelector(".toggle#hex");
+			let header = document.getElementById("header");
+			rgb.addEventListener("change", function () {
+				if (rgb.checked) {
+					hex.checked = false; // Turn off HEX checkbox
+				} else {
+					hex.checked = true; // Turn on HEX checkbox
+				}
+			});
+
+			hex.addEventListener("change", function () {
+				if (hex.checked) {
+					rgb.checked = false; // Turn off RGB checkbox
+				} else {
+					rgb.checked = true; // Turn on RGB checkbox
+				}
+			});
+			function changeColour() {
+				let button = document.getElementsByClassName("btn")[0];
+				let container = document.getElementsByClassName("container")[0];
+				let rRed = Math.floor(Math.random() * 255);
+				let rBlue = Math.floor(Math.random() * 255);
+				let rGreen = Math.floor(Math.random() * 255);
+				let colour;
+				console.log(rRed);
+				console.log(rBlue);
+				console.log(rGreen);
+				container.style.backgroundColor = `rgb(${rRed}, ${rBlue}, ${rGreen})`;
+				if (rgb.checked) {
+					colour = container.style.backgroundColor;
+				} else {
+					colour =
+						"#" + rRed.toString(16) + rBlue.toString(16) + rGreen.toString(16);
+				}
+				header.innerText = "Background Colour: " + colour.toUpperCase();
+			}
+		</script>
+	</body>
+</html>
