@@ -10,6 +10,8 @@
 			href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap"
 			rel="stylesheet"
 		/>
+		<script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous"></script>
+
 	</head>
 	<style>
 		body,
@@ -82,6 +84,31 @@
 		.toggle:checked + .label .ball {
 			transform: translateX(60px);
 		}
+		/* FOOTER */
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: 100%;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+}
+
+.fa-github {
+	color: black;
+	font-size: 40px;
+	transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+	transform: rotate(360deg) scale(1.2);
+}
 	</style>
 	<body>
 		<div class="title">Colour Changer</div>
@@ -112,6 +139,18 @@
 			<button class="btn" onclick="changeColour()">
 				Change Colour Randomly!
 			</button>
+			<footer class="footer">
+						<p>
+						  Copyright ©
+						  <script>
+							document.write(new Date().getFullYear())
+						  </script>
+						  Krackalackel02
+						  <a href="https://github.com/krackalackel02" target="_blank">
+							<i class="fab fa-github"></i
+						  ></a>
+						</p>
+					  </footer>
 		</div>
 		<script>
 			let rgb = document.querySelector(".toggle#rgb");
@@ -152,5 +191,8 @@
 				header.innerText = "Background Colour: " + colour.toUpperCase();
 			}
 		</script>
+
+
+				
 	</body>
 </html>
